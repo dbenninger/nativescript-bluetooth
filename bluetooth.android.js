@@ -509,7 +509,10 @@ Bluetooth.startScanning = function (arg) {
             if (android.os.Build.VERSION.SDK_INT < 21 /* android.os.Build.VERSION_CODES.LOLLIPOP */) {
               adapter.stopLeScan(Bluetooth._scanCallback);
             } else {
-              adapter.getBluetoothLeScanner().stopScan(Bluetooth._scanCallback);
+              var bluetoothLeScanner = adapter.getBluetoothLeScanner();
+              if (bluetoothLeScanner) {
+                bluetoothLeScanner.stopScan(Bluetooth._scanCallback);
+              }
             }
             resolve();
           }, arg.seconds * 1000);
@@ -542,7 +545,10 @@ Bluetooth.stopScanning = function () {
       if (android.os.Build.VERSION.SDK_INT < 21 /* android.os.Build.VERSION_CODES.LOLLIPOP */) {
         adapter.stopLeScan(Bluetooth._scanCallback);
       } else {
-        adapter.getBluetoothLeScanner().stopScan(Bluetooth._scanCallback);
+        var bluetoothLeScanner = adapter.getBluetoothLeScanner();
+        if (bluetoothLeScanner) {
+          bluetoothLeScanner.stopScan(Bluetooth._scanCallback);
+        }
       }
       resolve();
     } catch (ex) {
