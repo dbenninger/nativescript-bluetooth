@@ -296,12 +296,14 @@ Bluetooth._MyGattCallback = android.bluetooth.BluetoothGattCallback.extend({
       }
       var device = bluetoothGatt.getDevice();
       var stateObject = Bluetooth._connections[device.getAddress()];
-      stateObject.onConnected({
-        UUID: device.getAddress(), // TODO consider renaming to id (and iOS as well)
-        name: device.getName(),
-        state: 'connected', // Bluetooth._getState(peripheral.state),
-        services: servicesJs
-      });
+      if (stateObject) {
+        stateObject.onConnected({
+          UUID: device.getAddress(), // TODO consider renaming to id (and iOS as well)
+          name: device.getName(),
+          state: 'connected', // Bluetooth._getState(peripheral.state),
+          services: servicesJs
+        });
+      }
     }
   },
 
