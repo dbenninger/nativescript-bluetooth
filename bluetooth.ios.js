@@ -250,7 +250,7 @@ var CBCentralManagerDelegateImpl = (function (_super) {
     if (newPeripheral || Bluetooth._state.continuousScan) {
       if (Bluetooth._state.onDiscovered) {
         var manufacturerId, manufacturerData;
-        if (advData.objectForKey(CBAdvertisementDataManufacturerDataKey)) {
+        if (advData.objectForKey(CBAdvertisementDataManufacturerDataKey) && advData.objectForKey(CBAdvertisementDataManufacturerDataKey).length >= 2) {
           var manufacturerIdBuffer = Bluetooth._toArrayBuffer(advData.objectForKey(CBAdvertisementDataManufacturerDataKey).subdataWithRange(NSMakeRange(0, 2)));
           manufacturerId = new DataView(manufacturerIdBuffer, 0).getUint16(0, true);
           manufacturerData = Bluetooth._toArrayBuffer(advData.objectForKey(CBAdvertisementDataManufacturerDataKey).subdataWithRange(NSMakeRange(2, advData.objectForKey(CBAdvertisementDataManufacturerDataKey).length - 2)));
