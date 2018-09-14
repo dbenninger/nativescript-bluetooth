@@ -119,7 +119,7 @@ Bluetooth._connections = {};
         }
         if (newPeripheral || Bluetooth._continuousScan) {
           var manufacturerId, manufacturerData;
-          if (result.getScanRecord().getManufacturerSpecificData().size() > 0) {
+          if (result.getScanRecord() && result.getScanRecord().getManufacturerSpecificData() && result.getScanRecord().getManufacturerSpecificData().size() > 0) {
             manufacturerId = result.getScanRecord().getManufacturerSpecificData().keyAt(0);
             manufacturerData = Bluetooth._decodeValue(result.getScanRecord().getManufacturerSpecificData().valueAt(0));
           }
